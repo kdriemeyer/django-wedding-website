@@ -5,6 +5,15 @@
     <link href="{% static 'bigday/css/creative.css' %}" rel="stylesheet">
 {% endblock %}
 {% block page_content %}
+    <head>
+        <style>
+            /* set the size of the div element that contains the map */
+            #map {
+                height: 400px; /* the height is 400 pixels */
+                width: 100%; /* the width is the width of the web page */
+            }
+        </style>
+    </head>
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Cory and Rowena's Big Day</a>
+                <a class="navbar-brand page-scroll" href="#page-top">John and Kari's Big Day</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,16 +33,19 @@
                         <a class="page-scroll" href="#main-header">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#event">Event</a>
+                        <a class="page-scroll" href="#schedule">Schedule</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#niagara">Niagara-on-the-Lake</a>
+                        <a class="page-scroll" href="#dos-and-donts">What (not) to Bring</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#other-stuff">Everything Else</a>
+                        <a class="page-scroll" href="#accommodations">Where to Stay</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#travel">Travel</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about-us">About Us</a>
                     </li>
                 </ul>
             </div>
@@ -45,7 +57,7 @@
     <header id="main-header">
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>We did it!!</h1>
+                <h1></h1>
                 {% comment %}
                 <hr>
                 <h2>It's wedding week!</h2>
@@ -63,21 +75,29 @@
                     <h2 class="section-heading">Welcome!</h2>
                     <hr>
                     <p>
-                        Hello friends and family! It's the week of the wedding!
+                        We'll be posted up at NatureBridge for the whole weekend, May 31 - June 2. NatureBridge is a
+                        non-profit youth camp located on Lake Crescent in Olympic National Park.
                     </p>
                     <p>
-                        If you're looking for information about the event, look no further!
-                        Please see below for all the details regarding <a href="#event" class="page-scroll">Friday night's welcome party</a> and <a href="#saturday-event" class="page-scroll">Saturday's event</a>.
+                        We're very excited to host all of our family and friends for the full
+                        <a href="#schedule" class="page-scroll"> weekend</a> and, along
+                        with Friday's welcome dinner, we'll be providing breakfast, lunch, and dinner on Saturday, as
+                        well as a departure brunch on Sunday. So, basically, please hang out with us. There are no
+                        food-sourcing-related excuses.
+                    <p>
+                        We know it's a bit of a trek no matter where you're coming from (HI east coasters!), but we
+                        promise it's well worth the journey. The Olympic Peninsula is home to the only rainforest in
+                        North America, complete with waterfalls, lakes, mountains, and beaches. It's a lovely
+                        combination of all the beauty the PNW has to offer and we can't wait to experience it with
+                        all of you!
                     </p>
                     <p>
-                        To get added to the wedding whatsapp group first create an account and then send an
-                        email to <a href="mailto:{{ support_email }}">{{ support_email }}</a>.
-                        Also, the current front-runner for the wedding hashtag (if you're into that sort of thing) is #getlukky.
+                        Given the travel time, we'd love to ask everyone to plan to arrive Friday afternoon / night
+                        (if possible) so that you can really unwind with us and relax the entire weekend. Also,
+                        traffic in Seattle can be terrible and we'd hate for anyone to get stuck in traffic cutting
+                        it close on Saturday!
                     </p>
-                    <p>
-                        Looking forward to seeing everyone soon!
-                    </p>
-                    <p class="pull-right">- Cory and Rowena</p>
+                    <p class="pull-right">- John and Kari</p>
                 </div>
             </div>
         </div>
@@ -91,19 +111,19 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
-                                    The Event
+                                    Wedding Weekend
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#niagara" class="portfolio-box page-scroll">
+                    <a href="#dos-and-donts" class="portfolio-box page-scroll">
                         <img src="{% static 'bigday/images/prince-of-wales-hotel-nav.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
-                                    Niagara-on-the-Lake
+                                    What to Bring
                                 </div>
                             </div>
                         </div>
@@ -125,19 +145,19 @@
         </div>
     </section>
     {% include 'partials/event.html' %}
-    <section id="niagara">
-        {% include 'partials/niagara.html' %}
+    <section id="dos-and-donts" class="bg-dark">
+        {% include 'partials/dos-and-donts.html' %}
     </section>
-{% comment %}
-        {% include 'partials/wedding-party.html' %}
-{% endcomment %}
-    <section id="other-stuff" class="bg-primary">
-        {% include 'partials/misc.html' %}
+    <section id="accommodations">
+        {% include 'partials/accommodations.html' %}
+    </section>
+    <section id="travel">
+        {% include 'partials/travel.html' %}
     </section>
     <section id="gifts">
         {% include 'partials/gifts.html' %}
     </section>
-    <section id="story" class="bg-dark">
+    <section id="about-us" class="bg-dark">
         {% include 'partials/story.html' %}
     </section>
     {% include 'partials/proposal.html' %}
