@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="section-heading text-center">Travel Info</h2>
+            <hr class="primary">
+            <p>NatureBridge, our home base for the weekend, is located at
+                <a href="https://goo.gl/izFqLA">111 Barnes Point Rd. Port Angeles, WA 98363</a></p>
+            <div id="map"></div>
+            <script>
+                // Initialize and add the map
+                function initMap() {
+                    // NatureBridge location
+                    var NatureBridge = {lat: 48.0596, lng: -123.7922};
+                    // The map, centered on NatureBridge
+                    var map = new google.maps.Map(
+                        document.getElementById('map'), {zoom: 9, center: NatureBridge});
+                    // The marker, positioned on NatureBridge
+                    var maker = new google.maps.Marker({position: NatureBridge, map: map});
+                }
+            </script>
+            <!--Load the API from the specified URL
+            * The async attribute allows the browser to render the page while the API loads
+            * The key parameter will contain your own API key (which is not needed for this tutorial)
+            * The callback parameter executes the initMap() function
+            -->
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+            </script>
+            <h3>Flying into SeaTac</h3>
+            <p>Driving from Seattle-Tacoma Airport takes approximately 2.5-3 hours.<br>
+            You'll have a couple options for driving routes. You can choose to drive around the peninsula <i>or</i> you
+            can take a car ferry - either from Seattle to Bainbridge Island or from Edmonds to Kingston. It takes
+            about the same amount of time, but you'll cut down on physical driving time and will be on a boat for
+            a bit (you can pretend you're on Grey's Anatomy and stare broodily at the city skyline if you like),
+            so that's pretty fun.</p>
+            <h3>Flying into Paine Field</h3>
+            <p>If you're extra adventurous and live in a city that offers flights to the newly-converted-to-commercial-airport
+            Paine Field, you can skip out on having to drive through Downtown Seattle. According to Google, drive time
+            is still about 3 hours, so choose whichever flight is cheapest I guess. Or, if you like new things, do this
+            one. Commercial flights to Paine Field start in Feb 2019 so they <b><i>should</i></b> have all the kinks
+            worked out by June.</p>
+            <h3>Carpooling</h3>
+            <p>Either way, we recommend coordinating flights and carpools with friends. There's plenty of parking
+            at NatureBridge but road trips are best with friends to share snacks and podcasts with and also to make
+            sure you don't fall asleep at the wheel.</p>
+            <p>And, finally, here's a photo to remind you what waits at the end of your journey!</p>
+        </div>
+    </div>
+</div>
