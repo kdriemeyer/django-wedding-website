@@ -9,7 +9,6 @@ from django.dispatch import receiver
 ALLOWED_TYPES = [
     ('formal', 'formal'),
     ('fun', 'fun'),
-    ('dimagi', 'dimagi'),
 ]
 
 
@@ -55,10 +54,14 @@ class Party(models.Model):
 
 
 MEALS = [
-    ('beef', 'cow'),
     ('fish', 'fish'),
-    ('hen', 'hen'),
+    ('chicken', 'hen'),
     ('vegetarian', 'vegetable'),
+]
+
+DIETARY_RESTRICTIONS = [
+    ('gluten-free', 'wheat'),
+    ('nut-free', 'nuts'),
 ]
 
 
@@ -72,6 +75,7 @@ class Guest(models.Model):
     email = models.TextField(null=True, blank=True)
     is_attending = models.NullBooleanField(default=None)
     meal = models.CharField(max_length=20, choices=MEALS, null=True, blank=True)
+    allergies = models.CharField(max_length=100, choices=DIETARY_RESTRICTIONS, null=True, blank=True)
     is_child = models.BooleanField(default=False)
 
     @property

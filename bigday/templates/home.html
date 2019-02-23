@@ -87,7 +87,7 @@
                     <p>
                         We know it's a bit of a trek no matter where you're coming from (HI east coasters!), but we
                         promise it's well worth the journey. The Olympic Peninsula is home to the only rainforest in
-                        North America, complete with waterfalls, lakes, mountains, and beaches. It's a lovely
+                        the lower 48 states, complete with waterfalls, lakes, mountains, and beaches. It's a lovely
                         combination of all the beauty the PNW has to offer and we can't wait to experience it with
                         all of you!
                     </p>
@@ -106,8 +106,8 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#event" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/ravine-nav.jpg' %}" class="img-responsive" alt="">
+                    <a href="#schedule" class="portfolio-box page-scroll">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Lake_Crescent_spring.jpg" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -119,7 +119,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#dos-and-donts" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/prince-of-wales-hotel-nav.jpg' %}" class="img-responsive" alt="">
+                        <img src="{% static 'bigday/images/NatureBridge2.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -130,8 +130,8 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#story" class="portfolio-box page-scroll">
-                        <img src="{% static 'bigday/images/twelve-apostles-nav.jpg' %}" class="img-responsive" alt="">
+                    <a href="#about-us" class="portfolio-box page-scroll">
+                        <img src="{% static 'bigday/images/about-us.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
@@ -151,7 +151,7 @@
     <section id="accommodations">
         {% include 'partials/accommodations.html' %}
     </section>
-    <section id="travel">
+    <section id="travel" class="bg-dark">
         {% include 'partials/travel.html' %}
     </section>
     <section id="gifts">
@@ -161,7 +161,6 @@
         {% include 'partials/story.html' %}
     </section>
     {% include 'partials/proposal.html' %}
-    {% include 'partials/save-the-dates.html' %}
     <section id="contact" class="bg-dark">
         <div class="container">
             <div class="row">
