@@ -5,7 +5,7 @@ from guests.models import Party, Guest
 
 
 def import_guests(path):
-    with open(path, 'rb') as csvfile:
+    with open(path, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         first_row = True
         for row in reader:
@@ -37,7 +37,7 @@ def export_guests():
     headers = [
         'party_name', 'first_name', 'last_name', 'party_type',
         'is_child', 'category', 'is_invited', 'is_attending',
-        'rehearsal_dinner', 'meal', 'email', 'comments'
+        'rehearsal_dinner', 'meal', 'allergies', 'email', 'comments'
     ]
     file = io.StringIO()
     writer = csv.writer(file)
@@ -56,6 +56,7 @@ def export_guests():
                     guest.is_attending,
                     party.rehearsal_dinner,
                     guest.meal,
+                    guest.allergies,
                     guest.email,
                     party.comments,
                 ])
