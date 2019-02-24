@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'bigday.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db', # set in docker-compose.yml
+        'PORT': 5432 # default postgres port
     }
 }
 
@@ -127,9 +130,10 @@ STATICFILES_DIRS = (
 )
 
 # the address your emails (save the dates/invites/etc.) will come from
-DEFAULT_WEDDING_FROM_EMAIL = 'John and Kari <jlb.kmd.wedding@gmail.com>'
+
+DEFAULT_WEDDING_FROM_EMAIL = 'Kari + John <jlb.kmd.wedding@gmail.com>'
 # the default reply-to of your emails
-DEFAULT_WEDDING_REPLY_EMAIL = 'jlb.kmd.wedding@gmail.com'
+DEFAULT_WEDDING_REPLY_EMAIL = 'jlb.kmd.wedding@gmail.com>'
 
 # when sending test emails it will use this address
 DEFAULT_WEDDING_TEST_EMAIL = DEFAULT_WEDDING_FROM_EMAIL
