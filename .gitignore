@@ -12,3 +12,5 @@ lib/
 bin/
 pyvenv.cfg
 lib64
+app.yaml
+settings_secret.py
