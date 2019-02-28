@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: wedding-migration-job
+spec:
+  template:
+    metadata:
+      name: wedding-migration-job
+    spec:
+      containers:
+      - name: wedding-migration
+        image: gcr.io/weddingwebsite-1549142551334/wedding-image
+        args:
+          - "migrate"
+        env:
+            # [START django-secret-key]
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key
+                  key: SECRET_KEY
+            # [END django-secret-key]
+            - name: DEBUG
+              value: '1'
+            - name: DB_HOST
+              value: 127.0.0.1
+              #value: '/cloudsql/weddingwebsite-1549142551334:us-west1:wedding-website-db'
+            - name: DB_PORT
+              value: '' # PostgreSQL port
+            - name: DB_NAME
+              value: 'guests'
+            # [START cloudsql_secrets]
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql
+                  key: password
+            # [END cloudsql_secrets]
+            - name: STATIC_URL
+              value: 'static.johnpluskari.com/'
+        volumeMounts:
+          - name: cloudsql
+            mountPath: /cloudsql
+
+      # [START proxy_container]
+      - image: gcr.io/cloudsql-docker/gce-proxy:1.05
+        name: cloudsql-proxy
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=weddingwebsite-1549142551334:us-west1:wedding-website-db=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: cloudsql
+            mountPath: /cloudsql
+      # [END proxy_container]
+      # Do not restart containers after they exit
+      restartPolicy: Never
+      volumes:
+      - name: cloudsql-oauth-credentials
+        secret:
+          secretName: cloudsql-oauth-credentials
+      - name: ssl-certs
+        hostPath:
+          path: /etc/ssl/certs
+      - name: cloudsql
+        emptyDir:
