@@ -18,5 +18,5 @@ COPY . .
 EXPOSE 80
 
 # Set up entrypoint to allow for all the django management commands
-ENTRYPOINT [ "python3", "manage.py" ]
-# ENTRYPOINT ["gunicorn", "bigday" ]
+#ENTRYPOINT [ "python3", "manage.py" ]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:80", "bigday.wsgi" ]

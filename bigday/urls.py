@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^', include('wedding.urls')),
     url(r'^', include('guests.urls')),
     url(r'^admin/', admin.site.urls),
-    url('^accounts/', include('django.contrib.auth.urls'))
+    url('^accounts/', include('django.contrib.auth.urls')),
+    url(r'^health/?', include('health_check.urls')),
 ]

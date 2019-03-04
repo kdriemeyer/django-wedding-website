@@ -55,11 +55,12 @@ class Party(models.Model):
 
 MEALS = [
     ('fish', 'fish'),
-    ('chicken', 'hen'),
+    ('chicken', 'chicken'),
     ('vegetarian', 'vegetable'),
 ]
 
 DIETARY_RESTRICTIONS = [
+    ('seafood-allergy', 'fish'),
     ('gluten-free', 'wheat'),
     ('nut-free', 'nuts'),
 ]
