@@ -29,8 +29,9 @@ class Party(models.Model):
     invitation_sent = models.DateTimeField(null=True, blank=True, default=None)
     invitation_opened = models.DateTimeField(null=True, blank=True, default=None)
     is_invited = models.BooleanField(default=False)
-    rehearsal_dinner = models.BooleanField(default=False)
+    rehearsal_dinner = models.NullBooleanField(default=False)
     is_attending = models.NullBooleanField(default=None)
+    staying_onsite = models.NullBooleanField(default=None)
     comments = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
@@ -71,7 +72,7 @@ class Guest(models.Model):
     A single guest
     """
     party = models.ForeignKey(Party, on_delete=models.CASCADE, )
-    first_name = models.TextField()
+    first_name = models.TextField(blank=True)
     last_name = models.TextField(null=True, blank=True)
     email = models.TextField(null=True, blank=True)
     is_attending = models.NullBooleanField(default=None)
@@ -86,7 +87,7 @@ class Guest(models.Model):
     @property
     def unique_id(self):
         # convert to string so it can be used in the "add" templatetag
-        return unicode(self.pk)
+        return str(self.pk)
 
-    def __unicode__(self):
+    def __str__(self):
         return 'Guest: {} {}'.format(self.first_name, self.last_name)

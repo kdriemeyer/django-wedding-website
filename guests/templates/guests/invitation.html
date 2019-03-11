@@ -41,7 +41,6 @@
                 </label>
                 {% endwith %}
             </div>
-            <!-- {% if not guest.is_child %} -->
             <div class="form-group">
                 {% with 'meal-'|add:guest.unique_id as meal_label %}
                 <label for="{{ meal_label }}" class="col-sm-3 control-label">... and will eat</label>
@@ -52,16 +51,15 @@
                 {% endfor %}
                 {% endwith %}
             </div>
-            {% endif %}
             {% endfor %}
             <div class="form-group col-sm-12">
-                <input type="text" name="comments" class="form-control" placeholder="Questions/comments/well wishes" >
+                <input type="text" name="comments" class="form-control" placeholder="Write us a haiku!" >
             </div>
             <div class="form-group">
                 <div class="text-center">
                     <input type="submit" class="btn btn-primary" value="Submit Response" />
                 </div>
-            </div>
+            </div>            
         </form>
         </section>
     </div>
@@ -73,10 +71,6 @@
         // enable/disable meal choices based on attendance
         $("input.attending-radio").change(function (e) {
             var target = $(e.target);
-            if (target.closest('.form-group').data('is-child') === "True") {
-                // don't attempt to update meals for children, who don't have them.
-                return;
-            }
             var value = target.attr('value');
             var mealButtonContainer = target.closest('.form-group').next('.form-group');
             var mealButtons = mealButtonContainer.find('[type=radio]');
