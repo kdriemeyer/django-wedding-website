@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import datetime
 import uuid
 
@@ -7,7 +6,6 @@ from django.dispatch import receiver
 
 # these will determine the default formality of correspondence
 ALLOWED_TYPES = [
-    ('formal', 'formal'),
     ('fun', 'fun'),
 ]
 
@@ -29,12 +27,12 @@ class Party(models.Model):
     invitation_sent = models.DateTimeField(null=True, blank=True, default=None)
     invitation_opened = models.DateTimeField(null=True, blank=True, default=None)
     is_invited = models.BooleanField(default=False)
-    rehearsal_dinner = models.NullBooleanField(default=False)
+    rehearsal_dinner = models.NullBooleanField(default=None)
     is_attending = models.NullBooleanField(default=None)
     staying_onsite = models.NullBooleanField(default=None)
     comments = models.TextField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return 'Party: {}'.format(self.name)
 
     @classmethod
@@ -53,19 +51,11 @@ class Party(models.Model):
     def guest_emails(self):
         return filter(None, self.guest_set.values_list('email', flat=True))
 
-
 MEALS = [
     ('fish', 'fish'),
     ('chicken', 'chicken'),
     ('vegetarian', 'vegetable'),
 ]
-
-DIETARY_RESTRICTIONS = [
-    ('seafood-allergy', 'fish'),
-    ('gluten-free', 'wheat'),
-    ('nut-free', 'nuts'),
-]
-
 
 class Guest(models.Model):
     """
@@ -77,7 +67,6 @@ class Guest(models.Model):
     email = models.TextField(null=True, blank=True)
     is_attending = models.NullBooleanField(default=None)
     meal = models.CharField(max_length=20, choices=MEALS, null=True, blank=True)
-    allergies = models.CharField(max_length=100, choices=DIETARY_RESTRICTIONS, null=True, blank=True)
     is_child = models.BooleanField(default=False)
 
     @property

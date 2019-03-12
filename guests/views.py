@@ -79,6 +79,14 @@ def invitation(request, invite_id):
             comments = request.POST.get('comments')
             party.comments = comments if not party.comments else '{}; {}'.format(party.comments, comments)
         party.is_attending = party.any_guests_attending
+        if (request.POST.get('staying-onsite') == 'yes'):
+            party.staying_onsite = True
+        else:
+            party.staying_onsite = False
+        if (request.POST.get('rehearsal') == 'yes'):
+            party.rehearsal_dinner = True
+        else:
+            party.rehearsal_dinner = False    
         party.save()
         return HttpResponseRedirect(reverse('rsvp-confirm', args=[invite_id]))
     return render(request, template_name='guests/invitation.html', context={
@@ -102,7 +110,7 @@ def _parse_invite_params(params):
             pk = int(param.split('-')[-1])
             response = responses.get(pk, {})
             response['meal'] = value
-            responses[pk] = response
+            responses[pk] = response          
 
     for pk, response in responses.items():
         yield InviteResponse(pk, response['attending'], response.get('meal', None))
