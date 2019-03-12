@@ -4,7 +4,7 @@
     <link href="{% static 'bigday/css/invitation.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 {% endblock %}
 {% block page_content %}
-    <div class="container" id="invitation-body">
+    <div class="container" id="invitation-body" style="background-color: rgba(255, 255, 255, 0.5);">
         <!--
         <section class="video-container">
             <div class="responsive-video">
@@ -12,61 +12,92 @@
             </div>
         </section>
         -->
-        <section class="col-md-6 text-center">
-            <div id="invitation-details">
-            <h2>Driemscum Wedding</h2>
+        <section class="col-sm-6 col-sm-offset-3 text-center"  style="padding-bottom: 15px;">
+            <div id="invitation-details" style="padding-top: 50px;">
+            <h4>Let the adventure begin!</h4>
+            <h4>Please join us for the wedding of</h4>
+            <h2>John Branscum</h2>
+            <h4><i>and</i></h4>
+            <h2 style="margin-top: ">Kari Driemeyer</h2>
             <p class="lead">
                 June 1, 2019, at 5:00 pm<br>
                 Nature Bridge<br>
-                Lake Crescent, WA
+                Lake Crescent, WA<br>
+                <i>Reception to follow</i>
             </p>
-            <p>Note: In true PNW fashion, the default meal for Saturday is a salmon dinner. If you're allergic,
-            there are alternate options available.</p>
-            </div>
+            <p>
+                Note: In true PNW fashion, the default meal for Saturday is a salmon dinner. If you're allergic,
+                there are alternate options available.
+            </p>
+            </div>             
         </section>
-        <section class="col-md-6">
-        <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
-            <h2 id="rsvp-header" class="text-center">RSVP</h2>
-            <div class="clearfix"></div>
-            {% csrf_token %}
-            {% for guest in party.ordered_guests.all %}
-            <div class="form-group" data-is-child="{{ guest.is_child }}">
-                {% with 'attending-'|add:guest.unique_id as attending_label %}
-                <label for="{{ attending_label }}" class="col-sm-3 control-label">{{ guest.name }}</label>
-                <label class="radio-inline">
-                    <input class="attending-radio" type="radio" name="{{ attending_label }}" value="yes" {% if guest.is_attending %}checked="checked"{% endif %} required> will attend
-                </label>
-                <label class="radio-inline">
-                    <input class="attending-radio" type="radio" name="{{ attending_label }}" value="no" {% if guest.is_attending == False %}checked="checked"{% endif %} required> will not attend
-                </label>
-                {% endwith %}
-            </div>
-            <div class="form-group">
-                {% with 'meal-'|add:guest.unique_id as meal_label %}
-                <label for="{{ meal_label }}" class="col-sm-3 control-label">... and will eat</label>
-                {% for meal_id, meal_name in meals %}
-                <label class="radio-inline">
-                    <input type="radio" name="{{ meal_label }}" id="{{ meal_label }}-yes" value="{{ meal_id }}" {% if guest.meal == meal_id %}checked="checked"{% endif %} {% if guest.is_attending == False %}disabled{% endif %} required> {{ meal_name }}
-                </label>
-                {% endfor %}
-                {% endwith %}
-            </div>
-            {% endfor %}
-            <div class="form-group col-sm-12">
-                <input type="text" name="comments" class="form-control" placeholder="Write us a haiku!" >
-            </div>
-            <div class="form-group">
-                <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Submit Response" />
-                </div>
-            </div>            
-        </form>
+        <section class="col-md-6 col-sm-offset-3" style="padding-bottom: 15px;  text-align: center" id="invitation-body">
+            <button id="rsvp" class="h2" style='padding: 15px; border: 0; border-radius: 4px;'>RSVP</button>
+            <form data-toggle="validator" id="rsvp-details" class="form-horizontal" method="post" style="display: none;">
+                <div style="text-align: left">
+                    <div class="clearfix"></div>
+                    {% csrf_token %}
+                    {% for guest in party.ordered_guests.all %}
+                    <div class="form-group" data-is-child="{{ guest.is_child }}">
+                        {% with 'attending-'|add:guest.unique_id as attending_label %}
+                        <label for="{{ attending_label }}" class="col-sm-3 control-label">{{ guest.name }}</label>
+                        <label class="radio-inline">
+                            <input class="attending-radio" type="radio" name="{{ attending_label }}" value="yes" {% if guest.is_attending %}checked="checked"{% endif %} required>will attend
+                        </label>
+                        <label class="radio-inline">
+                            <input class="attending-radio" type="radio" name="{{ attending_label }}" value="no" {% if guest.is_attending == False %}checked="checked"{% endif %} required>will not attend
+                        </label>               
+                        {% endwith %}
+                    </div>
+                    <div class="form-group">
+                        {% with 'meal-'|add:guest.unique_id as meal_label %}
+                            <label for="{{ meal_label }}" class="col-sm-3 control-label">... and will eat</label>
+                            {% for meal_id, meal_name in meals %}
+                            <label class="radio-inline">
+                                <input type="radio" name="{{ meal_label }}" id="{{ meal_label }}-yes" value="{{ meal_id }}" {% if guest.meal == meal_id %}checked="checked"{% endif %} {% if guest.is_attending == False %}disabled{% endif %} required> {{ meal_name }}
+                            </label>
+                            {% endfor %}
+                        {% endwith %}
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label for="staying-onsite" class="col-sm-3 control-label">{{ party.name }}</label>
+                        <label class="radio-inline">
+                            <input class="logistics-radio" type="radio" name="staying-onsite" value="yes" {% if party.staying_onsite %}checked="checked"{% endif %} required> will stay onsite
+                        </label>
+                        <label class="radio-inline">
+                            <input class="logistics-radio" type="radio" name="staying-onsite" value="no" {% if party.staying_onsite == False %}checked="checked"{% endif %} required> will find other accommodations
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="rehearsal" class="col-sm-3 control-label">Will you be there for dinner on Friday?</label>
+                        <label class="radio-inline">
+                            <input class="logistics-radio" type="radio" name="rehearsal" value="yes" {% if party.rehearsal_dinner %}checked="checked"{% endif %} required> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input class="logistics-radio" type="radio" name="rehearsal" value="no" {% if party.rehearsal_dinner == False %}checked="checked"{% endif %} required> No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments" class="h3 col-sm-6 col-sm-offset-3 text-center">Write us a haiku!</label>
+                        <input type="text" name="comments" class="form-control" placeholder="Write it in here!">
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-primary" value="Submit Response" />
+                        </div>
+                    </div>
+                </div>           
+            </form>
         </section>
     </div>
 {% endblock %}
 {% block page_js %}
     <script src="{% static 'validator.js' %}"></script>
     <script>
+    $("#rsvp").click(function(){
+        $("#rsvp-details").toggle("slow");
+    });
     $(function () {
         // enable/disable meal choices based on attendance
         $("input.attending-radio").change(function (e) {
@@ -88,10 +119,32 @@
                     button.required = false;
                 });
             }
+            var attending = document.getElementsByClassName('attending-radio');
+            var any_attending = false;
+            for (var i = 0; i < attending.length; i++) {
+                if (attending[i].value === 'yes' && attending[i].checked) any_attending = true;
+            }
+            var onsiteButtons = document.getElementsByClassName('logistics-radio');
+            if (any_attending) {
+                for (var i = 0; i < onsiteButtons.length; i++) {
+                    onsiteButtons[i].parentElement.parentElement.classList.remove('text-muted');
+                    onsiteButtons[i].muted = true;
+                    onsiteButtons[i].disabled = false;
+                    onsiteButtons[i].required = true;
+                }
+            } else {
+                for (var i = 0; i < onsiteButtons.length; i++) {
+                    onsiteButtons[i].parentElement.parentElement.classList.add('text-muted');
+                    onsiteButtons[i].muted = false;
+                    onsiteButtons[i].checked = false;
+                    onsiteButtons[i].disabled = true;
+                    onsiteButtons[i].required = false;
+                }                
+            }            
             // reload validation
             $(document.forms[0]).validator('destroy');
             $(document.forms[0]).validator();
         });
-    });
+    });   
     </script>
 {% endblock %}

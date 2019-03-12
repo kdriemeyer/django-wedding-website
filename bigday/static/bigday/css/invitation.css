@@ -26,7 +26,8 @@
 }
 
 #invitation-details, #rsvp-form {
-    margin-top: 2em;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-top: 3em;
     padding: 1em;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -44,13 +45,14 @@ body {
 }
 
 #invitation-body {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.6);
     padding-bottom: 2em;
     margin-top: 1em;
     margin-bottom: 2em;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    border: .2em solid grey;
 }
 
 #footer {
